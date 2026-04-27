@@ -1,0 +1,6 @@
+# One prompt per line. Empty lines and lines starting with # are ignored.
+Write a concise LinkedIn post about a fintech trend that matters in 2026.
+Write a short LinkedIn post on how AI is changing software engineering productivity.
+Write a professional LinkedIn post sharing one practical lesson from building in public.
+Write a motivating LinkedIn post about consistency and career growth in tech.
+Write a concise LinkedIn post on balancing engineering quality and delivery speed.

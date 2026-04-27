@@ -34,6 +34,19 @@ Configure the following in GitHub repository secrets:
 - `LINKEDIN_AUTHOR_URN`: Your LinkedIn author URN.
 - `OLLAMA_MODEL` (optional): Model name to use (example: `llama3`).
 
+## Quick Start
+
+1. Add repository secrets in GitHub:
+
+- `LINKEDIN_TOKEN`
+- `LINKEDIN_AUTHOR_URN`
+- `OLLAMA_MODEL` (optional)
+
+2. Ensure your self-hosted runner has `ollama`, `jq`, `curl`, and `bash` available.
+3. Update prompts in `prompts/prompts.txt`.
+4. Run the workflow manually once with `workflow_dispatch`.
+5. Verify the post appears on your LinkedIn profile and review the workflow artifact.
+
 ## Suggested Project Structure
 
 ```text
@@ -60,7 +73,7 @@ name: Daily LinkedIn Post
 
 on:
   schedule:
-    - cron: "0 9 * * *" # Update to your preferred UTC schedule
+    - cron: "30 3 * * *" # 09:00 IST
   workflow_dispatch:
 
 jobs:

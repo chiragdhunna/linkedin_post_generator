@@ -1,0 +1,41 @@
+name: Daily LinkedIn Post
+
+on:
+  schedule:
+    # 09:00 IST daily
+    - cron: "30 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  linkedin-post:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generate post with Ollama
+        env:
+          OLLAMA_MODEL: ${{ secrets.OLLAMA_MODEL }}
+          PROMPTS_FILE: prompts/prompts.txt
+          OUTPUT_FILE: post.txt
+        run: |
+          bash scripts/generate_post.sh
+
+      - name: Publish to LinkedIn
+        env:
+          LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
+          LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
+          POST_FILE: post.txt
+        run: |
+          bash scripts/post_to_linkedin.sh
+
+      - name: Archive generated post
+        run: |
+          mkdir -p posts
+          cp post.txt "posts/post-$(date -u +%Y%m%dT%H%M%SZ).txt"
+
+      - name: Upload post artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: latest-linkedin-post
+          path: post.txt
