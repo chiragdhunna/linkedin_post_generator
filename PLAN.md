@@ -3,7 +3,7 @@
 ## 1. Project Setup
 
 - **Repository Creation**
-  - Create a GitHub repository (e.g., `linkedin-ollama-action`).
+  - Create a GitHub repository (e.g., `linkedin_post_generator`).
   - Add a README with purpose, usage, and setup instructions.
 - **Secrets Configuration**
   - Store LinkedIn API token (`LINKEDIN_TOKEN`) in GitHub Secrets.
@@ -117,7 +117,7 @@ jobs:
 ## 6. Recommended Folder Structure
 
 ```text
-linkedin-ollama-action/
+linkedin_post_generator/
 ├── .github/
 │   └── workflows/
 │       └── linkedin-post.yml   # GitHub Action workflow
