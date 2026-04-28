@@ -9,35 +9,35 @@ on:
 jobs:
   linkedin-post:
     runs-on: self-hosted
-    defaults:
-      run:
-        shell: 'C:\Program Files\Git\bin\bash.exe -e -o pipefail {0}'
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
       - name: Generate post with Ollama
+        shell: powershell
         env:
           OLLAMA_MODEL: ${{ secrets.OLLAMA_MODEL }}
-          PROMPTS_FILE: prompts/prompts.txt
-          OUTPUT_FILE: post.txt
-          PATH: "C:\\Program Files\\Git\\bin;C:\\Users\\chira\\AppData\\Local\\Programs\\Ollama;${{ env.PATH }}"
         run: |
-          bash scripts/generate_post.sh
+          $env:PROMPTS_FILE = "prompts/prompts.txt"
+          $env:OUTPUT_FILE = "post.txt"
+          & "C:\Program Files\Git\bin\bash.exe" -e -o pipefail scripts/generate_post.sh
 
       - name: Publish to LinkedIn
+        shell: powershell
         env:
           LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
           LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
-          POST_FILE: post.txt
         run: |
-          bash scripts/post_to_linkedin.sh
+          $env:POST_FILE = "post.txt"
+          & "C:\Program Files\Git\bin\bash.exe" -e -o pipefail scripts/post_to_linkedin.sh
 
       - name: Archive generated post
+        shell: powershell
         run: |
-          mkdir -p posts
-          cp post.txt "posts/post-$(date -u +%Y%m%dT%H%M%SZ).txt"
+          New-Item -ItemType Directory -Force -Path posts | Out-Null
+          $timestamp = (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssZ")
+          Copy-Item post.txt "posts/post-$timestamp.txt"
 
       - name: Upload post artifact
         uses: actions/upload-artifact@v4
