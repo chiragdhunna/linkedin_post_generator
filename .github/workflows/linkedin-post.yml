@@ -20,7 +20,7 @@ jobs:
           OUTPUT_FILE: post.txt
         shell: 'C:\\Program Files\\Git\\usr\\bin\\bash.exe -lc'
         run: |
-          bash scripts/generate_post.sh
+          ./scripts/generate_post.sh
 
       - name: Publish to LinkedIn
         env:
@@ -29,7 +29,7 @@ jobs:
           POST_FILE: post.txt
         shell: 'C:\\Program Files\\Git\\usr\\bin\\bash.exe -lc'
         run: |
-          bash scripts/post_to_linkedin.sh
+          ./scripts/post_to_linkedin.sh
 
       - name: Archive generated post
         shell: 'C:\\Program Files\\Git\\usr\\bin\\bash.exe -lc'
