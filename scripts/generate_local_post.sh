@@ -3,9 +3,10 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 GENERATE_SCRIPT="$SCRIPT_DIR/generate_post.sh"
+REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 
 OUTPUT_FILE="${OUTPUT_FILE:-post.txt}"
-ARCHIVE_DIR="${ARCHIVE_DIR:-posts}"
+ARCHIVE_DIR="${ARCHIVE_DIR:-$REPO_ROOT/posts}"
 
 if [[ ! -f "$GENERATE_SCRIPT" ]]; then
   echo "Error: generate_post.sh not found at $GENERATE_SCRIPT"

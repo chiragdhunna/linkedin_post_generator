@@ -17,7 +17,7 @@ This project is designed to:
 1. A scheduled GitHub Actions workflow runs once per day.
 2. The workflow runs `scripts/generate_post.sh` to select a prompt from `prompts/prompts.txt` and generate `post.txt` with Ollama.
 3. The workflow runs `scripts/post_to_linkedin.sh` to publish the post via the LinkedIn UGC API.
-4. The workflow copies the generated post into `posts/post-<timestamp>.txt` and uploads `post.txt` as a workflow artifact.
+4. After a successful publish, the script archives the post into `posts/post-<timestamp>.txt` and the workflow uploads `post.txt` as a workflow artifact.
 
 ## Prerequisites
 
@@ -170,7 +170,8 @@ Store multiple prompts in [prompts/prompts.txt](prompts/prompts.txt) and randoml
 ## Reliability Enhancements
 
 - Retry logic is built into `scripts/post_to_linkedin.sh`.
-- Generated posts are archived in the `posts/` directory.
+- Successfully published posts are archived in the `posts/` directory.
+- Before publishing, the script checks the archive and skips exact duplicates.
 - The workflow uploads `post.txt` as a workflow artifact.
 
 ## Future Improvements

@@ -32,13 +32,6 @@ jobs:
           $env:POST_FILE = "post.txt"
           & "C:\Program Files\Git\bin\bash.exe" -e -o pipefail scripts/post_to_linkedin.sh
 
-      - name: Archive generated post
-        shell: powershell
-        run: |
-          New-Item -ItemType Directory -Force -Path posts | Out-Null
-          $timestamp = (Get-Date).ToUniversalTime().ToString("yyyyMMddTHHmmssZ")
-          Copy-Item post.txt "posts/post-$timestamp.txt"
-
       - name: Upload post artifact
         uses: actions/upload-artifact@v4
         with:
