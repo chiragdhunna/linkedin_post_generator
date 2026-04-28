@@ -67,10 +67,22 @@ To generate a post locally without publishing it, run:
 bash scripts/generate_post.sh
 ```
 
+To generate a post locally and archive it into `posts/`, run:
+
+```bash
+bash scripts/generate_local_post.sh
+```
+
 To use a specific model locally, set `OLLAMA_MODEL` first:
 
 ```bash
 OLLAMA_MODEL=llama3 bash scripts/generate_post.sh
+```
+
+You can also archive to a different folder if you want:
+
+```bash
+ARCHIVE_DIR=posts OLLAMA_MODEL=llama3 bash scripts/generate_local_post.sh
 ```
 
 The generated post is written to `post.txt`. If you want to publish the file manually afterward, use:
