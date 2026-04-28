@@ -22,8 +22,9 @@ jobs:
           OLLAMA_MODEL: ${{ secrets.OLLAMA_MODEL }}
           PROMPTS_FILE: prompts/prompts.txt
           OUTPUT_FILE: post.txt
+          PATH: "C:\\Program Files\\Git\\bin;C:\\Users\\chira\\AppData\\Local\\Programs\\Ollama;${{ env.PATH }}"
         run: |
-          ./scripts/generate_post.sh
+          bash scripts/generate_post.sh
 
       - name: Publish to LinkedIn
         env:
@@ -31,7 +32,7 @@ jobs:
           LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
           POST_FILE: post.txt
         run: |
-          ./scripts/post_to_linkedin.sh
+          bash scripts/post_to_linkedin.sh
 
       - name: Archive generated post
         run: |
