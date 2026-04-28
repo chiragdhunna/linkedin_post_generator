@@ -18,7 +18,7 @@ jobs:
           OLLAMA_MODEL: ${{ secrets.OLLAMA_MODEL }}
           PROMPTS_FILE: prompts/prompts.txt
           OUTPUT_FILE: post.txt
-        shell: 'C:\Program Files\Git\bin\bash.exe -e -o pipefail {0}'
+          shell: 'C:\Program Files\Git\usr\bin\bash.exe -e -o pipefail {0}'
         run: |
           ./scripts/generate_post.sh
 
@@ -27,12 +27,12 @@ jobs:
           LINKEDIN_TOKEN: ${{ secrets.LINKEDIN_TOKEN }}
           LINKEDIN_AUTHOR_URN: ${{ secrets.LINKEDIN_AUTHOR_URN }}
           POST_FILE: post.txt
-        shell: 'C:\Program Files\Git\bin\bash.exe -e -o pipefail {0}'
+          shell: 'C:\Program Files\Git\usr\bin\bash.exe -e -o pipefail {0}'
         run: |
           ./scripts/post_to_linkedin.sh
 
       - name: Archive generated post
-        shell: 'C:\Program Files\Git\bin\bash.exe -e -o pipefail {0}'
+          shell: 'C:\Program Files\Git\usr\bin\bash.exe -e -o pipefail {0}'
         run: |
           mkdir -p posts
           cp post.txt "posts/post-$(date -u +%Y%m%dT%H%M%SZ).txt"
