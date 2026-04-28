@@ -24,6 +24,8 @@ else
   PROMPT="${PROMPTS[$INDEX]}"
 fi
 
+PROMPT="Write only the LinkedIn post itself. Do not add a heading, introduction, explanation, quotation marks, or phrases like 'Here is a possible LinkedIn post'. Keep it natural, human, and ready to publish.\n\n$PROMPT"
+
 echo "Using model: $OLLAMA_MODEL"
 echo "Selected prompt: $PROMPT"
 
